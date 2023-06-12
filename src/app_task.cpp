@@ -90,9 +90,8 @@ void StopSensorTimer()
 
 void AppTask::SensorMeasureHandler(const AppEvent &)
 {
-	chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::Set(
-		/* endpoint ID */ 1,
-		/* temperature in 0.01*C */ int16_t(rand() % 5000));
+	chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::Set(1, int16_t(rand() % 5000));
+	chip::app::Clusters::RelativeHumidityMeasurement::Attributes::MeasuredValue::Set(1, int16_t(rand() % 5000));
 }
 
 CHIP_ERROR AppTask::Init()
