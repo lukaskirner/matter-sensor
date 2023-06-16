@@ -5,8 +5,6 @@
  */
 
 #include "app_task.h"
-
-#include <zephyr/sys/printk.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/usb/usb_device.h>
 
@@ -17,8 +15,7 @@ int main()
 	CHIP_ERROR err = CHIP_NO_ERROR;
 
 	err = chip::System::MapErrorZephyr(usb_enable(NULL));
-	if (err != CHIP_NO_ERROR)
-	{
+	if (err != CHIP_NO_ERROR) {
 		LOG_ERR("Failed to initialize USB device");
 		return EXIT_FAILURE;
 	}

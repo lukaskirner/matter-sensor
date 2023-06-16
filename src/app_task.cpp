@@ -6,6 +6,7 @@
 
 #include "app_task.h"
 #include "app_config.h"
+#include "hs300x/hs300x.h"
 #include "led_util.h"
 
 #include "board_util.h"
@@ -90,8 +91,11 @@ void StopSensorTimer()
 
 void AppTask::SensorMeasureHandler(const AppEvent &)
 {
-	chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::Set(1, int16_t(rand() % 5000));
-	chip::app::Clusters::RelativeHumidityMeasurement::Attributes::MeasuredValue::Set(2, int16_t(rand() % 5000));
+	float temp = HS300x::Instance().ReadTemperature();
+	chip::app::Clusters::TemperatureMeasurement::Attributes::MeasuredValue::Set(1, int16_t(temp * 100));
+
+	float hum = HS300x::Instance().ReadHumidity();
+	chip::app::Clusters::RelativeHumidityMeasurement::Attributes::MeasuredValue::Set(2, int16_t(hum * 100));
 }
 
 CHIP_ERROR AppTask::Init()
@@ -181,6 +185,7 @@ CHIP_ERROR AppTask::Init()
 	}
 
 	// Init Sensor
+	HS300x::Instance().Init();
 	k_timer_init(&sSensorTimer, &SensorTimerHandler, nullptr);
 	k_timer_user_data_set(&sSensorTimer, this);
 	StartSensorTimer(10000);

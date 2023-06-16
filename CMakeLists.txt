@@ -45,6 +45,7 @@ target_sources(app PRIVATE
     src/zap-generated/IMClusterCommandHandler.cpp
     src/zap-generated/callback-stub.cpp
     ${COMMON_ROOT}/src/led_widget.cpp
+    src/hs300x/hs300x.cpp
 )
 
 if(CONFIG_CHIP_OTA_REQUESTOR)

@@ -16,3 +16,14 @@
 		compatible = "zephyr,cdc-acm-uart";
 	};
 };
+
+
+&i2c1 {
+	hs3003: hs3003@4a {
+		compatible = "i2c-device";
+		status = "okay";
+		reg = <0x44>;
+		label = "hs3003";
+	};
+};
+
