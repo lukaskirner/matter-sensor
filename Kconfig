@@ -16,6 +16,9 @@ choice OPENTHREAD_DEVICE_TYPE
 	default OPENTHREAD_MTD
 endchoice
 
+config OPENTHREAD_MTD_SED
+	default y
+	
 endif # NET_L2_OPENTHREAD
 
 source "${ZEPHYR_BASE}/../modules/lib/matter/config/nrfconnect/chip-module/Kconfig.features"
